@@ -19,6 +19,7 @@ public class PasswordController {
 
     /*
         Citation: https://www.baeldung.com/spring-response-header
+        Citation: https://www.baeldung.com/sprint-boot-multipart-requests
         Accessed: 4-21-2022
     */
     @GetMapping
@@ -26,8 +27,8 @@ public class PasswordController {
         return ResponseEntity.ok().body(passwordService.makeRandomPassword());
     }
 
-    @PostMapping
-    public ResponseEntity<Password> getCustomizedPassword(@RequestBody CustomPasswordFilter customPasswordFilter){
+    @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public ResponseEntity<Password> getCustomizedPassword(@ModelAttribute CustomPasswordFilter customPasswordFilter){
 
         Password result = passwordService.customizedPassword(customPasswordFilter);
 
