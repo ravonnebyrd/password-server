@@ -41,20 +41,20 @@ public class PasswordService {
         Citation: https://stackoverflow.com/questions/242438/is-it-better-to-reuse-a-stringbuilder-in-a-loop
         Accessed: 4-20-2022
     */
-    public String makeRandomPassword(){
+    public Password makeRandomPassword(){
 
         // password length
         int length = randomIntegerBetween8and20();
 
-        // result to return
-        StringBuilder result = new StringBuilder();
+        // str to return
+        StringBuilder str = new StringBuilder();
 
         // loop to generate string characters
         for (int i = 0; i < length; i++){
-            result.append(randomASCIIBetween33and126());
+            str.append(randomASCIIBetween33and126());
         }
 
-        return result.toString();
+        return new Password(str.toString());
 
     }
 
