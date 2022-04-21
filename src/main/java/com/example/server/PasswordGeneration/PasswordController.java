@@ -26,17 +26,10 @@ public class PasswordController {
         return ResponseEntity.ok().body(passwordService.makeRandomPassword());
     }
 
-    @PostMapping("/custom")
-    public ResponseEntity<Password> getCustomizedPassword(@RequestBody int length,
-                                                          String symbols,
-                                                          String uppercase,
-                                                          String lowercase,
-                                                          String numbers){
+    @PostMapping
+    public ResponseEntity<Password> getCustomizedPassword(@RequestBody CustomPasswordFilter customPasswordFilter){
 
-        System.out.println(length + ' ' + symbols + ' ' + uppercase + ' ' + lowercase + ' ' + numbers);
-
-        Password result = passwordService.customizedPassword(length,
-                                    symbols, uppercase, lowercase, numbers);
+        Password result = passwordService.customizedPassword(customPasswordFilter);
 
         if (!result.password.isBlank() && !result.password.isEmpty()){
             return ResponseEntity.ok().body(result);
