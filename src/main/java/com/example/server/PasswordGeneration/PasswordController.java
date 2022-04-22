@@ -27,8 +27,8 @@ public class PasswordController {
         return ResponseEntity.ok().body(passwordService.makeRandomPassword());
     }
 
-    @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public ResponseEntity<Password> getCustomizedPassword(@ModelAttribute CustomPasswordFilter customPasswordFilter){
+    @PostMapping
+    public ResponseEntity<Password> getCustomizedPassword(@RequestBody CustomPasswordFilter customPasswordFilter){
 
         Password result = passwordService.customizedPassword(customPasswordFilter);
 
