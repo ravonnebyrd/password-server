@@ -2,7 +2,7 @@ package com.example.server.PasswordGeneration;
 
 public class CustomPasswordFilter {
 
-    public int length;
+    public String length;
     public String symbols;
     public String uppercase;
     public String lowercase;
@@ -11,29 +11,29 @@ public class CustomPasswordFilter {
     public CustomPasswordFilter() {
     }
 
-    public CustomPasswordFilter(int length) {
+    public CustomPasswordFilter(String length) {
         this.length = length;
     }
 
-    public CustomPasswordFilter(int length, String symbols) {
+    public CustomPasswordFilter(String length, String symbols) {
         this.length = length;
         this.symbols = symbols;
     }
 
-    public CustomPasswordFilter(int length, String symbols, String uppercase) {
+    public CustomPasswordFilter(String length, String symbols, String uppercase) {
         this.length = length;
         this.symbols = symbols;
         this.uppercase = uppercase;
     }
 
-    public CustomPasswordFilter(int length, String symbols, String uppercase, String lowercase) {
+    public CustomPasswordFilter(String length, String symbols, String uppercase, String lowercase) {
         this.length = length;
         this.symbols = symbols;
         this.uppercase = uppercase;
         this.lowercase = lowercase;
     }
 
-    public CustomPasswordFilter(int length, String symbols, String uppercase, String lowercase, String numbers) {
+    public CustomPasswordFilter(String length, String symbols, String uppercase, String lowercase, String numbers) {
         this.length = length;
         this.symbols = symbols;
         this.uppercase = uppercase;
@@ -41,11 +41,11 @@ public class CustomPasswordFilter {
         this.numbers = numbers;
     }
 
-    public int getLength() {
+    public String getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(String length) {
         this.length = length;
     }
 
