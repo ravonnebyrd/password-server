@@ -2,38 +2,38 @@ package com.example.server.PasswordGeneration;
 
 public class CustomPasswordFilter {
 
-    public int length;
-    public String symbols;
-    public String uppercase;
-    public String lowercase;
-    public String numbers;
+    public String length;
+    public Boolean symbols;
+    public Boolean uppercase;
+    public Boolean lowercase;
+    public Boolean numbers;
 
     public CustomPasswordFilter() {
     }
 
-    public CustomPasswordFilter(int length) {
+    public CustomPasswordFilter(String length) {
         this.length = length;
     }
 
-    public CustomPasswordFilter(int length, String symbols) {
+    public CustomPasswordFilter(String length, Boolean symbols) {
         this.length = length;
         this.symbols = symbols;
     }
 
-    public CustomPasswordFilter(int length, String symbols, String uppercase) {
+    public CustomPasswordFilter(String length, Boolean symbols, Boolean uppercase) {
         this.length = length;
         this.symbols = symbols;
         this.uppercase = uppercase;
     }
 
-    public CustomPasswordFilter(int length, String symbols, String uppercase, String lowercase) {
+    public CustomPasswordFilter(String length, Boolean symbols, Boolean uppercase, Boolean lowercase) {
         this.length = length;
         this.symbols = symbols;
         this.uppercase = uppercase;
         this.lowercase = lowercase;
     }
 
-    public CustomPasswordFilter(int length, String symbols, String uppercase, String lowercase, String numbers) {
+    public CustomPasswordFilter(String length, Boolean symbols, Boolean uppercase, Boolean lowercase, Boolean numbers) {
         this.length = length;
         this.symbols = symbols;
         this.uppercase = uppercase;
@@ -41,43 +41,43 @@ public class CustomPasswordFilter {
         this.numbers = numbers;
     }
 
-    public int getLength() {
+    public String getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(String length) {
         this.length = length;
     }
 
-    public String getSymbols() {
+    public Boolean getSymbols() {
         return symbols;
     }
 
-    public void setSymbols(String symbols) {
+    public void setSymbols(Boolean symbols) {
         this.symbols = symbols;
     }
 
-    public String getUppercase() {
+    public Boolean getUppercase() {
         return uppercase;
     }
 
-    public void setUppercase(String uppercase) {
+    public void setUppercase(Boolean uppercase) {
         this.uppercase = uppercase;
     }
 
-    public String getLowercase() {
+    public Boolean getLowercase() {
         return lowercase;
     }
 
-    public void setLowercase(String lowercase) {
+    public void setLowercase(Boolean lowercase) {
         this.lowercase = lowercase;
     }
 
-    public String getNumbers() {
+    public Boolean getNumbers() {
         return numbers;
     }
 
-    public void setNumbers(String numbers) {
+    public void setNumbers(Boolean numbers) {
         this.numbers = numbers;
     }
 

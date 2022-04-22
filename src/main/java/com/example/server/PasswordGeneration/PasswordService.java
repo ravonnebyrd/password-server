@@ -2,7 +2,10 @@ package com.example.server.PasswordGeneration;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.function.Supplier;
+
+import static java.lang.Integer.parseInt;
 
 
 @Service
@@ -285,7 +288,8 @@ public class PasswordService {
     */
     public Password customizedPassword(CustomPasswordFilter cPW) {
 
-        int passwordLength = (cPW.length != 0) ? cPW.length : randomIntegerBetween8and30();
+        int length = parseInt(cPW.length);
+        int passwordLength = (length != 0) ? length : randomIntegerBetween8and30();
 
         // str to return
         StringBuilder str = new StringBuilder();
@@ -294,97 +298,81 @@ public class PasswordService {
         Supplier<String> passwordFunction = null;
 
         // 4 options, 16 combinations
-        if ((!cPW.symbols.isEmpty() && !cPW.symbols.isBlank()) && (!cPW.uppercase.isEmpty() && !cPW.uppercase.isBlank())
-                && (!cPW.lowercase.isEmpty() && !cPW.lowercase.isBlank()) && (!cPW.numbers.isEmpty() && !cPW.numbers.isBlank())){
+        if (cPW.symbols && cPW.uppercase && cPW.lowercase && cPW.numbers){
 
             // All set
             passwordFunction = this::randomASCIIBetween33and126;
 
-        } else if ((!cPW.symbols.isEmpty() && !cPW.symbols.isBlank()) && (!cPW.uppercase.isEmpty() && !cPW.uppercase.isBlank())
-                && (cPW.lowercase.isEmpty() || cPW.lowercase.isBlank()) && (!cPW.numbers.isEmpty() && !cPW.numbers.isBlank())){
+        } else if (cPW.symbols && cPW.uppercase && !cPW.lowercase && cPW.numbers){
 
             // lowercase is null
             passwordFunction = this::randomASCIINoLowercase;
 
-        } else if ((!cPW.symbols.isEmpty() && !cPW.symbols.isBlank()) && (cPW.uppercase.isEmpty() || cPW.uppercase.isBlank())
-                && (!cPW.lowercase.isEmpty() && !cPW.lowercase.isBlank()) && (!cPW.numbers.isEmpty() && !cPW.numbers.isBlank())){
+        } else if (cPW.symbols && !cPW.uppercase && cPW.lowercase && cPW.numbers){
 
             // uppercase is null
             passwordFunction = this::randomASCIINoUppercase;
 
-        } else if ((!cPW.symbols.isEmpty() && !cPW.symbols.isBlank()) && (cPW.uppercase.isEmpty() || cPW.uppercase.isBlank())
-                && (cPW.lowercase.isEmpty() || cPW.lowercase.isBlank()) && (!cPW.numbers.isEmpty() && !cPW.numbers.isBlank())){
+        } else if (cPW.symbols && !cPW.uppercase && !cPW.lowercase && cPW.numbers){
 
             passwordFunction = this::randomASCIINoUppercaseNoLowercase;
 
-        } else if ((!cPW.symbols.isEmpty() && !cPW.symbols.isBlank()) && (!cPW.uppercase.isEmpty() && !cPW.uppercase.isBlank())
-                && (!cPW.lowercase.isEmpty() && !cPW.lowercase.isBlank()) && (cPW.numbers.isEmpty() || cPW.numbers.isBlank())){
+        } else if (cPW.symbols && cPW.uppercase && cPW.lowercase && (!cPW.numbers)){
 
             // numbers is null
             passwordFunction = this::randomASCIINoNumbers;
 
-        } else if ((!cPW.symbols.isEmpty() && !cPW.symbols.isBlank()) && (!cPW.uppercase.isEmpty() && !cPW.uppercase.isBlank())
-                && (cPW.lowercase.isEmpty() || cPW.lowercase.isBlank()) && (cPW.numbers.isEmpty() || cPW.numbers.isBlank())){
+        } else if (cPW.symbols && cPW.uppercase && !cPW.lowercase && !cPW.numbers){
 
             // numbers and lowercase is null
             passwordFunction = this::randomASCIINoNumbersNoLowercase;
 
-        } else if ((!cPW.symbols.isEmpty() && !cPW.symbols.isBlank()) && (cPW.uppercase.isEmpty() || cPW.uppercase.isBlank())
-                && (!cPW.lowercase.isEmpty() && !cPW.lowercase.isBlank()) && (cPW.numbers.isEmpty() || cPW.numbers.isBlank())){
+        } else if (cPW.symbols && !cPW.uppercase && cPW.lowercase && !cPW.numbers){
 
             // numbers and uppercase is null
             passwordFunction = this::randomASCIINoNumbersNoUppercase;
 
-        } else if ((!cPW.symbols.isEmpty() && !cPW.symbols.isBlank()) && (cPW.uppercase.isEmpty() || cPW.uppercase.isBlank())
-                && (cPW.lowercase.isEmpty() || cPW.lowercase.isBlank()) && (cPW.numbers.isEmpty() || cPW.numbers.isBlank())){
+        } else if (cPW.symbols && !cPW.uppercase && !cPW.lowercase && !cPW.numbers){
 
             // numbers, uppercase, and lowercase null
             passwordFunction = this::randomASCIINoNumbersNoUppercaseNoLowercase;
 
-        } else if ((cPW.symbols.isEmpty() || cPW.symbols.isBlank()) && (!cPW.uppercase.isEmpty() && !cPW.uppercase.isBlank())
-                && (!cPW.lowercase.isEmpty() && !cPW.lowercase.isBlank()) && (!cPW.numbers.isEmpty() && !cPW.numbers.isBlank())){
+        } else if (!cPW.symbols && cPW.uppercase && cPW.lowercase && cPW.numbers){
 
             // symbols null
             passwordFunction = this::randomASCIINoSymbols;
 
-        } else if ((cPW.symbols.isEmpty() || cPW.symbols.isBlank()) && (!cPW.uppercase.isEmpty() && !cPW.uppercase.isBlank())
-                && (cPW.lowercase.isEmpty() || cPW.lowercase.isBlank()) && (!cPW.numbers.isEmpty() && !cPW.numbers.isBlank())){
+        } else if (!cPW.symbols && cPW.uppercase && !cPW.lowercase && cPW.numbers){
 
             // symbols and lowercase null
             passwordFunction = this::randomASCIINoSymbolsNoLowercase;
 
-        } else if ((cPW.symbols.isEmpty() || cPW.symbols.isBlank()) && (cPW.uppercase.isEmpty() || cPW.uppercase.isBlank())
-                && (!cPW.lowercase.isEmpty() && !cPW.lowercase.isBlank()) && (!cPW.numbers.isEmpty() && !cPW.numbers.isBlank())){
+        } else if (!cPW.symbols && !cPW.uppercase && cPW.lowercase && cPW.numbers){
 
             // symbols and uppercase null
             passwordFunction = this::randomASCIINoSymbolsNoUppercase;
 
-        } else if ((cPW.symbols.isEmpty() || cPW.symbols.isBlank()) && (cPW.uppercase.isEmpty() || cPW.uppercase.isBlank())
-                && (cPW.lowercase.isEmpty() || cPW.lowercase.isBlank()) && (!cPW.numbers.isEmpty() && !cPW.numbers.isBlank())){
+        } else if (!cPW.symbols && !cPW.uppercase && !cPW.lowercase && cPW.numbers){
 
             // symbols uppercase and lowercase null
             passwordFunction = this::randomASCIINoSymbolsNoUppercaseNoLowercase;
 
-        } else if ((cPW.symbols.isEmpty() || cPW.symbols.isBlank()) && (!cPW.uppercase.isEmpty() && !cPW.uppercase.isBlank())
-                && (!cPW.lowercase.isEmpty() && !cPW.lowercase.isBlank()) && (cPW.numbers.isEmpty() || cPW.numbers.isBlank())){
+        } else if (!cPW.symbols && cPW.uppercase && cPW.lowercase && !cPW.numbers){
 
             // symbols and numbers null
             passwordFunction = this::randomASCIINoSymbolsNoNumbers;
 
-        } else if ((cPW.symbols.isEmpty() || cPW.symbols.isBlank()) && (!cPW.uppercase.isEmpty() && !cPW.uppercase.isBlank())
-                && (cPW.lowercase.isEmpty() || cPW.lowercase.isBlank()) && (cPW.numbers.isEmpty() || cPW.numbers.isBlank())){
+        } else if (!cPW.symbols && cPW.uppercase && !cPW.lowercase && !cPW.numbers){
 
             // symbols lowercase and numbers null
             passwordFunction = this::randomASCIINoSymbolsNoNumbersNoLowercase;
 
-        } else if ((cPW.symbols.isEmpty() || cPW.symbols.isBlank()) && (cPW.uppercase.isEmpty() || cPW.uppercase.isBlank())
-                && (!cPW.lowercase.isEmpty() && !cPW.lowercase.isBlank()) && (cPW.numbers.isEmpty() || cPW.numbers.isBlank())){
+        } else if (!cPW.symbols && !cPW.uppercase && cPW.lowercase && !cPW.numbers){
 
             // symbols numbers uppercase null
             passwordFunction = this::randomASCIINoSymbolsNoNumbersNoUppercase;
 
-        } else if ((cPW.symbols.isEmpty() || cPW.symbols.isBlank()) && (cPW.uppercase.isEmpty() || cPW.uppercase.isBlank())
-                && (cPW.lowercase.isEmpty() || cPW.lowercase.isBlank()) && (cPW.numbers.isEmpty() || cPW.numbers.isBlank())){
+        } else if (!cPW.symbols && !cPW.uppercase && !cPW.lowercase && !cPW.numbers){
 
             // All null
             return new Password("");
