@@ -5,6 +5,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping(path = "password")
 @CrossOrigin(origins = {"http://localhost:3000", "https://password-ui.herokuapp.com/"})
@@ -33,6 +35,8 @@ public class PasswordController {
         Password result = passwordService.customizedPassword(customPasswordFilter);
 
         if (!result.password.isBlank() && !result.password.isEmpty()){
+            return ResponseEntity.ok().body(result);
+        } else if (Objects.equals(customPasswordFilter.length, "0")){
             return ResponseEntity.ok().body(result);
         } else {
             return ResponseEntity.status(500).body(result);
