@@ -3,6 +3,7 @@ package com.example.server.PasswordGeneration;
 public class CustomPasswordFilter {
 
     public String length;
+
     public Boolean symbols;
     public Boolean uppercase;
     public Boolean lowercase;
