@@ -375,7 +375,7 @@ public class PasswordService {
         } else if (!cPW.symbols && !cPW.uppercase && !cPW.lowercase && !cPW.numbers){
 
             // All null
-            return new Password("");
+            passwordFunction = this::randomASCIIBetween33and126;
 
         }
 

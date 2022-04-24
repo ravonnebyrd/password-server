@@ -34,13 +34,7 @@ public class PasswordController {
 
         Password result = passwordService.customizedPassword(customPasswordFilter);
 
-        if (!result.password.isBlank() && !result.password.isEmpty()){
-            return ResponseEntity.ok().body(result);
-        } else if (Objects.equals(customPasswordFilter.length, "0")){
-            return ResponseEntity.ok().body(result);
-        } else {
-            return ResponseEntity.status(500).body(result);
-        }
+        return ResponseEntity.ok().body(result);
 
     }
 }
