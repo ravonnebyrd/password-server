@@ -2,58 +2,59 @@ package com.example.server.PostRateMicroservice;
 
 public class Shipping {
 
-    public int Weight;
+    public int weight;
 
-    public int Zone;
+    public int zone;
 
-    public Double ShippingTotal;
+    public Double shippingTotal;
 
-    public Double WholeTotal;
+    public Double wholeTotal;
 
-    public Shipping(int weight, int zone) {
-        Weight = weight;
-        Zone = zone;
+    public Shipping(int w, int z, double s) {
+        weight = w;
+        zone = z;
+        shippingTotal = s;
     }
 
     public float getWeight() {
-        return Weight;
+        return weight;
     }
 
-    public void setWeight(int weight) {
-        Weight = weight;
+    public void setWeight(int w) {
+        weight = w;
     }
 
     public int getZone() {
-        return Zone;
+        return zone;
     }
 
-    public void setZone(int zone) {
-        Zone = zone;
+    public void setZone(int z) {
+        zone = z;
     }
 
     public Double getShippingTotal() {
-        return ShippingTotal;
+        return shippingTotal;
     }
 
-    public void setShippingTotal(Double shippingTotal) {
-        ShippingTotal = shippingTotal;
+    public void setShippingTotal(Double s) {
+        shippingTotal = s;
     }
 
     public Double getWholeTotal() {
-        return WholeTotal;
+        return wholeTotal;
     }
 
-    public void setWholeTotal(Double wholeTotal) {
-        WholeTotal = wholeTotal;
+    public void setWholeTotal(Double w) {
+        wholeTotal = w;
     }
 
     @Override
     public String toString() {
         return "Shipping{" +
-                "Weight=" + Weight +
-                ", Zone=" + Zone +
-                ", ShippingTotal=" + ShippingTotal +
-                ", WholeTotal=" + WholeTotal +
+                "Weight=" + weight +
+                ", Zone=" + zone +
+                ", ShippingTotal=" + shippingTotal +
+                ", WholeTotal=" + wholeTotal +
                 '}';
     }
 }

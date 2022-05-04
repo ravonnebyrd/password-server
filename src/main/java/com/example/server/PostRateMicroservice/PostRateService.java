@@ -27,29 +27,32 @@ public class PostRateService {
 
     public Shipping getShipping(CustomPostRateFilter cPWF){
 
-        Shipping result = new Shipping(parseInt(cPWF.getWeight()), parseInt(cPWF.getZone()));
+        int weight = parseInt(cPWF.getWeight());
+        int zone = parseInt(cPWF.getZone());
+        int weightLookup;
 
         Double shipping;
-        if (result.getWeight() < 5){
+        if (weight < 5){
 
-            shipping = lookup.get(1)[result.getZone()];
+            weightLookup = 1;
 
-        } else if (result.getWeight() < 9 && result.getWeight() > 4){
+        } else if (weight < 9){
 
-            shipping = lookup.get(5)[result.getZone()];
+            weightLookup = 5;
 
-        } else if (result.getWeight() < 13 && result.getWeight() > 8){
+        } else if (weight < 13){
 
-            shipping = lookup.get(9)[result.getZone()];
+            weightLookup = 9;
 
         } else {
 
-            shipping = lookup.get(13)[result.getZone()];
+            weightLookup = 13;
 
         }
 
-        result.setShippingTotal(shipping);
+        shipping = lookup.get(weightLookup)[zone - 1];
 
-        return result;
+
+        return new Shipping(weight, zone, shipping);
     }
 }
