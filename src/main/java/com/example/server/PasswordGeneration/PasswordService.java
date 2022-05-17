@@ -3,10 +3,10 @@ package com.example.server.PasswordGeneration;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Objects;
 import java.util.function.Supplier;
 
 import static java.lang.Integer.parseInt;
+import com.github.dhiraj072.randomwordgenerator.RandomWordGenerator;
 
 
 @Service
@@ -23,6 +23,10 @@ public class PasswordService {
     int MIN_ASCII = 33;
     int MAX_ASCII = 126;
 
+    /*
+        Citation: https://www.geeksforgeeks.org/how-to-call-or-consume-external-api-in-spring-boot/
+        Accessed: 5-16-2022
+    */
     public int randomIntegerBetween8and30(){
 
         RestTemplate restTemplate = new RestTemplate();
@@ -387,5 +391,13 @@ public class PasswordService {
         }
 
         return new Password(str.toString());
+    }
+
+    public Username makeRandomUsername() {
+
+        // str to return
+        String str = RandomWordGenerator.getRandomWord() + RandomWordGenerator.getRandomWord();
+
+        return new Username(str);
     }
 }

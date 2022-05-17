@@ -37,4 +37,13 @@ public class PasswordController {
         return ResponseEntity.ok().body(result);
 
     }
+
+    @GetMapping(path="username")
+    public ResponseEntity<Username> getRandomUsername(){
+
+
+        Username result = passwordService.makeRandomUsername();
+
+        return ResponseEntity.ok().body(result);
+    }
 }
