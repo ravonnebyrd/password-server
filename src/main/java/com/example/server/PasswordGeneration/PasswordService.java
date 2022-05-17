@@ -396,8 +396,20 @@ public class PasswordService {
     public Username makeRandomUsername() {
 
         // str to return
-        String str = RandomWordGenerator.getRandomWord() + RandomWordGenerator.getRandomWord();
+        String str1 = RandomWordGenerator.getRandomWord();
 
-        return new Username(str);
+        while (str1.contains(" ")){
+            str1 = RandomWordGenerator.getRandomWord();
+        }
+
+        String str2 = RandomWordGenerator.getRandomWord();
+
+        while (str2.contains(" ")){
+            str2 = RandomWordGenerator.getRandomWord();
+        }
+
+        String result = str1 + str2;
+
+        return new Username(result);
     }
 }
