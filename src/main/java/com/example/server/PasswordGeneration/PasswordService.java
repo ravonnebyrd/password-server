@@ -1,6 +1,7 @@
 package com.example.server.PasswordGeneration;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -24,10 +25,10 @@ public class PasswordService {
 
     public int randomIntegerBetween8and30(){
 
-        int min = 8;
-        int max = 30;
+        RestTemplate restTemplate = new RestTemplate();
+        RandomNumber number = restTemplate.getForObject("https://micro361.herokuapp.com/", RandomNumber.class);
 
-        return (int) Math.floor(Math.random() * (max - min + 1) + min);
+        return number.Number;
     }
 
     /*
