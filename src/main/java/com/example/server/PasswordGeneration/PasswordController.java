@@ -38,6 +38,16 @@ public class PasswordController {
 
     }
 
+    @PostMapping(path="passphrase")
+    public ResponseEntity<Password> getPassphrase(@RequestBody NumberOfWords numberOfWords){
+
+        Password result = passwordService.passphrase(numberOfWords);
+
+        return ResponseEntity.ok().body(result);
+
+    }
+
+
     @GetMapping(path="username")
     public ResponseEntity<Username> getRandomUsername(){
 

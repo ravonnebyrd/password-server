@@ -412,4 +412,18 @@ public class PasswordService {
 
         return new Username(result);
     }
+
+    public Password passphrase(NumberOfWords numberOfWords) {
+
+        int words = parseInt(numberOfWords.Number);
+        // str to return
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < words; i++){
+            str.append(RandomWordGenerator.getRandomWord());
+        }
+
+        return new Password(str.toString());
+
+    }
 }
